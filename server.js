@@ -1,6 +1,10 @@
 const express = require("express");
 const path = require("path");
 
+function makeRandomIndex() {
+  const randomIndex = Math.floor(Math.random() * complements.length);
+  return randomIndex;
+}
 const complements = [
   "You like nice today",
   "That dress looks nice on you",
@@ -14,8 +18,27 @@ const complements = [
 ];
 
 function getRandomComplement() {
-  const randomIndex = Math.floor(Math.random() * complements.length);
-  return complements[randomIndex];
+  return complements[makeRandomIndex()];
+}
+
+const insults = [
+  "Tosser",
+  "Wanker",
+  "Slag",
+  "Cheese Eating Surrender Monkeys",
+  "Lost the plot",
+  "Daft Cow",
+  "Arsehole",
+  "Barmy",
+  "Chav",
+  "Dodgy",
+  "Git",
+  "Gormless",
+  "Manky"
+];
+
+function getRandomInsult() {
+  return insults[makeRandomIndex()];
 }
 
 const app = express();
@@ -28,6 +51,14 @@ app.get("/complement", function(req, res) {
   res
     .json({
       complement: getRandomComplement()
+    })
+    .end();
+});
+
+app.get("/insult", function(req, res) {
+  res
+    .json({
+      insult: getRandomInsult()
     })
     .end();
 });
